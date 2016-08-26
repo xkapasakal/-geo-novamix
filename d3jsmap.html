@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>D3 World Map</title>
+    <style>
+      path {
+        stroke: white;
+        stroke-width: 0.5px;
+        fill: black;
+      }
+    </style>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+  </head>
+  <body>
+    <script type="text/javascript">
+
+      var width = 960,
+      height = 1160;
+
+      var svg = d3.select("body").append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+      d3.json("nomoi_okxe.topojson", function(error, nomoi_okxe) {
+        if (error) return console.error(error);
+
+        svg.append("path")
+            .datum(topojson.feature(nomoi_okxe, nomoi_okxe.objects.nomoi_okxe))
+            .attr("d", d3.geo.path().projection(d3.geo.mercator()));
+      });
+
+
+
+
+
+
+
+      // var width = 900;
+      // var height = 600;
+
+      // var projection = d3.geo.mercator();
+      
+      // var svg = d3.select("body").append("svg")
+      //     .attr("width", width)
+      //     .attr("height", height);
+      // var path = d3.geo.path()
+      //     .projection(projection);
+      // var g = svg.append("g");
+      
+      // d3.json("nomoi_okxe.topojson", function(error, topology) {
+      //     g.selectAll("path")
+      //       .data(topojson.feature(topology, topology.objects.nomoi_okxe))
+      //     .enter()
+      //       .append("path")
+      //       .attr("d", path)
+
+      // svg.append("path")
+      //   .datum(topojson.feature(uk, uk.objects.subunits))
+      //   .attr("d", d3.geo.path().projection(d3.geo.mercator()));
+
+      // });
+    </script>
+  </body>
+</html>
